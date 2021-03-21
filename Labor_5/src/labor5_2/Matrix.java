@@ -14,13 +14,18 @@ public class Matrix {
     }
 
     public Matrix(double[][] data) {
-        this.data = data;
+        this.rows = data.length;
+        this.columns = data[0].length;
+        this.data = new double[rows][columns];
+        for(int i = 0; i < rows; ++i) {
+            for(int j = 0; j < columns; ++j) {
+                this.data[i][j] = data[i][j];
+            }
+        }
     }
 
     public Matrix(Matrix matrix) {
-        this.rows = matrix.rows;
-        this.columns = matrix.columns;
-        this.data = matrix.data;
+        this(matrix.data);
     }
 
     public void fillRandom(double first, double last) {

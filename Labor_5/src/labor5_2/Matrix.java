@@ -81,4 +81,16 @@ public class Matrix {
 
         return result;
     }
+
+    public static Matrix transpose(Matrix m1) {
+        Matrix result = new Matrix(m1.columns, m1.rows);
+
+        for(int i = 0; i<m1.rows; ++i) {
+            for(int j = 0; j<m1.columns; ++j) {
+                result.data[j][i] = m1.data[i][j];
+            }
+        }
+
+        return result;
+    }
 }

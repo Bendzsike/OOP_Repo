@@ -1,0 +1,2 @@
+This is a test file for our encoding/decoding FileUtil Interface.
+It will shift every byte with one, so the encoded text will be random jibberish.

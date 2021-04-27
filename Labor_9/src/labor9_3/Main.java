@@ -13,5 +13,6 @@ public class Main {
         System.out.println("Amount of items updated: " + amount);
         System.out.println(end - start);
 //        storage.print();
+//        System.out.println("asd");
     }
 }

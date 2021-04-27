@@ -18,26 +18,23 @@ public class Stack {
         return this.items.size() == 0;
     }
 
-    public void push(Object element) {
+    public void push(Object element) throws StackException {
         if(this.isFull()) {
-            System.out.println("Stack is full!");
-            return;
+            throw new StackException("Stack is full!");
         }
         this.items.add(element);
     }
 
-    public void pop() {
+    public void pop() throws StackException {
         if(this.isEmpty()) {
-            System.out.println("Stack is empty!");
-            return;
+            throw new StackException("Stack is empty!");
         }
         this.items.remove(this.items.size() - 1);
     }
 
-    public Object top() {
+    public Object top() throws StackException {
         if(this.isEmpty()) {
-            System.out.println("Stack is empty!");
-            return null;
+            throw new StackException("Stack is empty!");
         }
         return this.items.get(items.size() - 1);
     }

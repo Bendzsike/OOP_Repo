@@ -7,7 +7,16 @@ public interface IExpression {
         double op1 = 0, op2 = 0;
         for(String value : values) {
             value = value.trim();
-            if(isOperator(value)) {
+            if(!isOperator(value)) {
+                try {
+                    operands.push(Double.parseDouble(value));
+                } catch (NumberFormatException e) {
+                    throw new ExpressionException("\tWrong operand: " + value);
+                }
+                catch (StackException e) {
+                    throw new ExpressionException("Stack is full");
+                }
+            } else {
                 try {
                     op1 = operands.top();
                     operands.pop();
@@ -21,15 +30,6 @@ public interface IExpression {
                     }
                 } catch (StackException e) {
                     throw new ExpressionException("\tWrong postfix expression\n");
-                }
-            } else {
-                try {
-                    operands.push(Double.parseDouble(value));
-                } catch (NumberFormatException e) {
-                    throw new ExpressionException("\tWrong operand: " + value);
-                }
-                catch (StackException e) {
-                    throw new ExpressionException("Stack is full");
                 }
             }
         }

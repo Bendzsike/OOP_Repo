@@ -14,7 +14,7 @@ public interface IExpression {
                     throw new ExpressionException("\tWrong operand: " + value);
                 }
                 catch (StackException e) {
-                    throw new ExpressionException("Stack is full");
+                    throw new ExpressionException("Stack is full!");
                 }
             } else {
                 try {
@@ -29,7 +29,7 @@ public interface IExpression {
                         case "/" -> operands.push(op1 / op2);
                     }
                 } catch (StackException e) {
-                    throw new ExpressionException("\tWrong postfix expression\n");
+                    throw new ExpressionException("\tWrong postfix expression");
                 }
             }
         }

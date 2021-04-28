@@ -7,7 +7,7 @@ public class Main {
             System.out.println("Eval(" + expression1 + "): " + IExpression.evaluate(expression1));
         } catch (ExpressionException e) {
             System.out.println("Wrong expression: " + expression1);
-            System.out.println("\t" + e);
+            System.out.println(e.getMessage());
         }
     }
 }

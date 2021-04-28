@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Stack {
     private int capacity;
-    ArrayList<Object> items = new ArrayList<>();
+    private ArrayList<Double> items = new ArrayList<>();
 
     public Stack(int capacity) {
         this.capacity = capacity;
@@ -18,7 +18,7 @@ public class Stack {
         return this.items.size() == 0;
     }
 
-    public void push(Object element) throws StackException {
+    public void push(Double element) throws StackException {
         if(this.isFull()) {
             throw new StackException("Stack is full!");
         }
@@ -32,7 +32,7 @@ public class Stack {
         this.items.remove(this.items.size() - 1);
     }
 
-    public Object top() throws StackException {
+    public Double top() throws StackException {
         if(this.isEmpty()) {
             throw new StackException("Stack is empty!");
         }

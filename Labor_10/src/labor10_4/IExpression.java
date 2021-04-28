@@ -4,87 +4,40 @@ public interface IExpression {
     public static double evaluate(String str) throws ExpressionException{
         String[] values = str.split(" ");
         Stack operands = new Stack(3);
-        for(int i = 0; i < values.length; ++i) {
-            if(!isOperator(values[i].trim())) {
+        double op1 = 0, op2 = 0;
+        for(String value : values) {
+            value = value.trim();
+            if(isOperator(value)) {
                 try {
-                    operands.push(values[i].trim());
-                } catch(StackException e) {
-                    e.getStackTrace();
+                    op1 = operands.top();
+                    operands.pop();
+                    op2 = operands.top();
+                    operands.pop();
+                    switch(value) {
+                        case "+" -> operands.push(op1 + op2);
+                        case "-" -> operands.push(op1 - op2);
+                        case "*" -> operands.push(op1 * op2);
+                        case "/" -> operands.push(op1 / op2);
+                    }
+                } catch (StackException e) {
+                    throw new ExpressionException("\tWrong postfix expression\n");
                 }
-            } else if(isOperator(values[i].trim())){
-                double op1, op2;
-                String operandInString = "";
+            } else {
                 try {
-                    try {
-                        operandInString = operands.top().toString();
-                    } catch (StackException e) {
-                        throw new ExpressionException("Wrong postfix expression\n");
-                    }
-                    op1 = Double.parseDouble(operandInString);
-                    try {
-                        operands.pop();
-                    } catch (StackException e) {
-                        e.getStackTrace();
-                    }
+                    operands.push(Double.parseDouble(value));
                 } catch (NumberFormatException e) {
-                    throw new ExpressionException("Wrong operand: " + operandInString);
+                    throw new ExpressionException("\tWrong operand: " + value);
                 }
-                try {
-                    try {
-                        operandInString = operands.top().toString();
-                    } catch (StackException e) {
-                        throw new ExpressionException("Wrong postfix expression\n");
-                    }
-                    op2 = Double.parseDouble(operandInString);
-                    try {
-                        operands.pop();
-                    } catch (StackException e) {
-                        e.getStackTrace();
-                    }
-                } catch (NumberFormatException e) {
-                    throw new ExpressionException("Wrong operand: " + operandInString);
+                catch (StackException e) {
+                    throw new ExpressionException("Stack is full");
                 }
-
-                switch (values[i]) {
-                    case "+":
-                        try {
-                            operands.push(op1 + op2);
-                        } catch (StackException e) {
-                            throw new ExpressionException("Stack is full!");
-                        }
-                        break;
-                    case "-":
-                        try {
-                            operands.push(op1 - op2);
-                        } catch (StackException e) {
-                            throw new ExpressionException("Stack is full!");
-                        }
-                        break;
-                    case "*":
-                        try {
-                            operands.push(op1 * op2);
-                        } catch (StackException e) {
-                            throw new ExpressionException("Stack is full!");
-                        }
-                        break;
-                    case "/":
-                        try {
-                            operands.push(op1 / op2);
-                        } catch (StackException e) {
-                            throw new ExpressionException("Stack is full!");
-                        }
-                        break;
-                }
-
             }
         }
-        String operandInString;
         try {
-            operandInString = operands.top().toString();
+            return operands.top();
         } catch (StackException e) {
-            throw new ExpressionException("Wrong postfix expression\n");
+            throw new ExpressionException("\tResult not in stack! (stack might be empty)");
         }
-        return Double.parseDouble(operandInString);
     }
 
     public static boolean isOperator(String str) {

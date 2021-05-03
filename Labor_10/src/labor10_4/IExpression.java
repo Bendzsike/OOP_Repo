@@ -14,7 +14,7 @@ public interface IExpression {
                     throw new ExpressionException("\tWrong operand: " + value);
                 }
                 catch (StackException e) {
-                    throw new ExpressionException("\tStack is full!");
+                    throw new ExpressionException("\tThis should never happen! (Stack is full!)");
                 }
             } else {
                 try {

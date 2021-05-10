@@ -14,18 +14,15 @@ public class TakeSomeFromArray extends Thread{
     @Override
     public void run() {
         int count = 0;
-        while(count != counter) {
+        while(count != counter && Main.counter > 0) {
             synchronized (array) {
                 int index = searchIndex();
                 if (index != -1) {
                     array[index] = " ";
-                    --Main1.counter;
+                    --Main.counter;
                     ++count;
                     System.out.println(Thread.currentThread().getName() + ": String \"" + replace + "\" has been replaced with \" \" (" + count + ". time(s))");
                 }
-            }
-            if(Main1.counter <= 0) {
-                stop();
             }
         }
         System.out.println(Thread.currentThread().getName() + ": String \"" + replace + "\" has been replaced " + count + " time(s), thread finishes work.");

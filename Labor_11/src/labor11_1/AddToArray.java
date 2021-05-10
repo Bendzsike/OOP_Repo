@@ -12,22 +12,19 @@ public class AddToArray extends Thread{
     @Override
     public void run() {
         Random rand = new Random();
-        while(true) {
+        while(Main.counter > 0) {
             int num = rand.nextInt(26);
             char ch = (char)(97 + num);
             synchronized (array) {
                 array[minIndex()] = "" + ch + ch + ch;
-                --Main1.counter;
+                --Main.counter;
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             print();
-            if(Main1.counter <= 0) {
-                stop();
-            }
         }
     }
 

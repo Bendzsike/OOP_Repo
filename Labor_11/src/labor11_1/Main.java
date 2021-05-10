@@ -1,11 +1,17 @@
 package labor11_1;
 
-public class Main2 {
+import java.util.Arrays;
+
+public class Main {
     public static void main(String[] args) {
-        String sa_array[] = new String[10];
-        for (int i = 0; i < sa_array.length; ++i) {
-            sa_array[i] = " ";
-        }
+        String[] sa_array = new String[10];
+        Arrays.fill(sa_array, " ");
+
+//        Thread producer = new AddToArray(sa_array);
+//        producer.start();
+//
+//        Thread editor = new TakeSomeFromArray(sa_array, "aaa", 5);
+//        editor.start();
 
         Thread[] producer = new Thread[4];
         for (Thread th : producer) {
